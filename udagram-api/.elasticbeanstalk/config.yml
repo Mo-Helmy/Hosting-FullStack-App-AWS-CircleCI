@@ -1,0 +1,23 @@
+# Setting EB deploy artifact to Archive.zip
+deploy:
+  artifact: ./www/Archive.zip
+
+# branch-defaults:
+#   main:
+#     environment: Myprojectv3-env
+# environment-defaults:
+#   Myprojectv3-env:
+#     branch: null
+#     repository: null
+# global:
+#   application_name: myprojectv3
+#   default_ec2_keyname: null
+#   default_platform: node.js
+#   default_region: us-east-1
+#   include_git_submodules: true
+#   instance_profile: null
+#   platform_name: null
+#   platform_version: null
+#   profile: null
+#   sc: git
+#   workspace_type: Application

@@ -1,0 +1,15 @@
+{
+    "scripts": {
+        "frontend:install": "cd udagram-frontend && npm install --legacy-peer-deps",
+        "backend:install": "cd udagram-api && npm install",
+        "frontend:build": "cd udagram-frontend && npm run build",
+        "backend:build": "cd udagram-api && npm run build",
+        "frontend:deploy": "cd udagram-frontend && npm run deploy",
+        "backend:deploy": "cd udagram-api && npm run deploy",
+        "backend:aws-eb": "cd udagram-api && npm run aws-eb",
+        "backend:change-main": "cd udagram-api && npm run change-main",
+        "frontend:test": "cd udagram-frontend && npm run test",
+        "frontend:e2e": "cd udagram-frontend && npm run e2e",
+        "frontend:karmaCli": "cd udagram-frontend && npm run karmaCli"
+    }
+}

@@ -1,0 +1,77 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@5.0.1
+  aws-cli: circleci/aws-cli@1.3.1
+  aws-elastic-beanstalk: circleci/aws-elastic-beanstalk@2.0.1
+jobs:
+  build-and-deploy:
+    docker:
+      - image: 'cimg/base:stable'
+    steps:
+      - node/install
+      - checkout
+      - aws-cli/setup
+# Installing the frontend dependencies
+      - run:
+          name: Front-End Install
+          command: |
+            npm run frontend:install
+      # - run:
+      #     name: Front-End Install Karma Cli
+      #     command: |
+      #       npm run frontend:karmaCli
+      # - run:
+      #     name: Front-End Tests
+      #     command: |
+      #       npm run frontend:test
+      # - run:
+      #     name: Front-End End-to-end Testing
+      #     command: |
+      #       npm run frontend:e2e
+
+# Building the frontend
+      - run:
+          name: Front-End Build
+          command: |
+            npm run frontend:build
+# Deploying the frontend to AWS S3
+      - run:
+          name: Front-End Deploy
+          command: |
+            npm run frontend:deploy
+# Installing the Backend dependencies
+      - run:
+          name: Back-End Install
+          command: |
+            npm run backend:install
+# Changing the main entry point in package.json for the Backend
+      - run:
+          name: Back-End Change Main Entry Point
+          command: |
+            npm run backend:change-main
+# Building the backend
+      - run:
+          name: Back-End Build
+          command: |
+            npm run backend:build
+# Installing AWS Elastic Beanstalk CLI
+      - run:
+          name: Installing AWS Elasticbeanstalk
+          command: |
+            npm run backend:aws-eb
+# Deploying the backend to AWS Elastic Beanstalk
+      - run:
+          name: Back-End Deploy
+          command: |
+            npm run backend:deploy
+
+workflows:
+  build-and-deploy:
+    jobs:
+      - build-and-deploy:
+          context: aws
+          filters:
+            branches:
+              only:
+                - main
